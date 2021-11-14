@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
 
 import com.carloliwanag.exam1.entity.DimensionCost;
 import com.carloliwanag.exam1.entity.WeightPriority;
@@ -15,6 +18,7 @@ import com.carloliwanag.exam1.utils.RuleName;
 @Service
 public class ParcelCalculatorServiceImpl implements ParcelCalculatorService {
 
+	private static final Logger log = LoggerFactory.getLogger(ParcelCalculatorServiceImpl.class);
 	
 	private DimensionCostRepository costs;
 	
@@ -41,7 +45,12 @@ public class ParcelCalculatorServiceImpl implements ParcelCalculatorService {
 		
 		List<WeightPriority> priorityList = new ArrayList<WeightPriority>();
 		priorities.findAll().forEach(priorityList::add);
+		
+		log.info("****************" + priorityList.toString());
+		
 		WeightPriority wp = this.getPriority(rules, priorityList);
+		
+		
 		
 		Optional<DimensionCost> optionalDimensionCost = costs.findById(wp.getDimensionCostId());
 		
@@ -96,7 +105,7 @@ public class ParcelCalculatorServiceImpl implements ParcelCalculatorService {
 	}
 	
 	
-	private WeightPriority getPriority(List<RuleName> rules, List<WeightPriority> priorityList) {
+	public WeightPriority getPriority(List<RuleName> rules, List<WeightPriority> priorityList) {
 		 WeightPriority priority = null;
 				
 		 
@@ -107,7 +116,7 @@ public class ParcelCalculatorServiceImpl implements ParcelCalculatorService {
 					priority = fromDB;
 				} else {
 					
-					if (priority.getPriority() < fromDB.getPriority()) {
+					if (priority.getPriority() > fromDB.getPriority()) {
 						priority = fromDB;
 					}
 				}
