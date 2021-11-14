@@ -13,7 +13,7 @@ public class WeightPriority {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "weight_priority_id")
-	private Integer id;
+	private Long id;
 
 	private Integer priority;
 
@@ -23,23 +23,23 @@ public class WeightPriority {
 	private String condition;
 
 	@Column(name = "dimension_cost_id")
-	private Integer dimensionCostId;
+	private Long dimensionCostId;
 
 	public WeightPriority() {
 	}
 
-	public WeightPriority(Integer priority, String ruleName, String condition, Integer dimensionCostId) {
+	public WeightPriority(Integer priority, String ruleName, String condition, Long dimensionCostId) {
 		this.priority = priority;
 		this.ruleName = ruleName;
 		this.condition = condition;
 		this.dimensionCostId = dimensionCostId;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -67,11 +67,11 @@ public class WeightPriority {
 		this.condition = condition;
 	}
 
-	public Integer getDimensionCostId() {
+	public Long getDimensionCostId() {
 		return dimensionCostId;
 	}
 
-	public void setDimensionCostId(Integer dimensionCostId) {
+	public void setDimensionCostId(Long dimensionCostId) {
 		this.dimensionCostId = dimensionCostId;
 	}
 

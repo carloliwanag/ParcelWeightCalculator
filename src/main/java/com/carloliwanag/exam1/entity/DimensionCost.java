@@ -13,7 +13,7 @@ public class DimensionCost {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "dimension_cost_id")
-	private Integer id;
+	private Long id;
 
 	private String dimension;
 	private String description;
@@ -30,11 +30,11 @@ public class DimensionCost {
 		this.description = description;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
