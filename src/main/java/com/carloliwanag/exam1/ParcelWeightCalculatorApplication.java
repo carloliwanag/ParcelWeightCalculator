@@ -31,7 +31,7 @@ public class ParcelWeightCalculatorApplication {
 			DimensionCost medium = dimensionCostRepository.save(new DimensionCost("volume", 0.04, "Medium" ));
 			DimensionCost large = dimensionCostRepository.save(new DimensionCost("volume", 0.05, "Large" ));
 			
-			
+			weightPriorityRepository.save(new WeightPriority(1, "Reject", "Weight exceeds 50kg", -1L));
 			weightPriorityRepository.save(new WeightPriority(2, "Heavy Parcel", "Weight exceeds 10kg", weight.getId()));
 			weightPriorityRepository.save(new WeightPriority(3, "Small Parcel", "Volume is less than 1500 cubic cm", small.getId()));
 			weightPriorityRepository.save(new WeightPriority(4, "Medium Parcel", "Volume is less than 2500 cubic cm", medium.getId()));
