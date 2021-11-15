@@ -19,7 +19,7 @@ public class ParcelCalculatorController {
 	}
 	
 	@GetMapping("/compute")
-	public Double computeCost(@RequestParam Double length, @RequestParam Double width, @RequestParam Double height, @RequestParam Double weight) {
-		return this.parcelCalculatorService.computeCost(height, length, width, weight);
+	public Double computeCost(@RequestParam Double length, @RequestParam Double width, @RequestParam Double height, @RequestParam Double weight, @RequestParam String promoCode) {
+		return this.parcelCalculatorService.computeCost(height, length, width, weight, promoCode);
 	}
 }
