@@ -54,7 +54,7 @@ public class TestParcelCalculatorService {
 	}
 
 	@Test
-	void getPriority() {
+	void getHeavyPriority() {
 
 		List<RuleName> rules = new ArrayList<RuleName>();
 
@@ -64,7 +64,8 @@ public class TestParcelCalculatorService {
 		rules.add(RuleName.LARGE);
 
 		List<WeightPriority> priorities = new ArrayList<WeightPriority>();
-
+		
+		WeightPriority reject = new WeightPriority(1, "Reject", "Weight exceeds 50kg", -1L);
 		WeightPriority heavy = new WeightPriority(2, "Heavy Parcel", "Weight exceeds 10kg", 1L);
 		WeightPriority small = new WeightPriority(3, "Small Parcel", "Volume is less than 1500 cubic cm", 2L);
 		WeightPriority medium = new WeightPriority(4, "Medium Parcel", "Volume is less than 2500 cubic cm", 3L);
@@ -74,10 +75,42 @@ public class TestParcelCalculatorService {
 		priorities.add(medium);
 		priorities.add(heavy);
 		priorities.add(small);
+		priorities.add(reject);
 		
 		WeightPriority priority = service.getPriority(rules, priorities);
 		
 		assertEquals(priority.getRuleName(), "Heavy Parcel");
+
+	}
+	
+	@Test
+	void getRejectPriority() {
+
+		List<RuleName> rules = new ArrayList<RuleName>();
+
+		rules.add(RuleName.HEAVY);
+		rules.add(RuleName.SMALL);
+		rules.add(RuleName.MEDIUM);
+		rules.add(RuleName.LARGE);
+		rules.add(RuleName.REJECT);
+
+		List<WeightPriority> priorities = new ArrayList<WeightPriority>();
+		
+		WeightPriority reject = new WeightPriority(1, "Reject", "Weight exceeds 50kg", -1L);
+		WeightPriority heavy = new WeightPriority(2, "Heavy Parcel", "Weight exceeds 10kg", 1L);
+		WeightPriority small = new WeightPriority(3, "Small Parcel", "Volume is less than 1500 cubic cm", 2L);
+		WeightPriority medium = new WeightPriority(4, "Medium Parcel", "Volume is less than 2500 cubic cm", 3L);
+		WeightPriority large = new WeightPriority(5, "Large Parcel", "", 4L);
+		
+		priorities.add(large);
+		priorities.add(medium);
+		priorities.add(heavy);
+		priorities.add(small);
+		priorities.add(reject);
+		
+		WeightPriority priority = service.getPriority(rules, priorities);
+		
+		assertEquals(priority.getRuleName(), "Reject");
 
 	}
 	

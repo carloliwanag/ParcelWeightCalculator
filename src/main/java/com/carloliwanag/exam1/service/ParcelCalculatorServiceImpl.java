@@ -15,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 import com.carloliwanag.exam1.dto.Discount;
 import com.carloliwanag.exam1.entity.DimensionCost;
 import com.carloliwanag.exam1.entity.WeightPriority;
+import com.carloliwanag.exam1.exception.ParcelOverWeightException;
 import com.carloliwanag.exam1.repository.DimensionCostRepository;
 import com.carloliwanag.exam1.repository.WeightPriorityRepository;
 import com.carloliwanag.exam1.utils.RuleName;
@@ -50,6 +51,13 @@ public class ParcelCalculatorServiceImpl implements ParcelCalculatorService {
 		priorities.findAll().forEach(priorityList::add);
 
 		WeightPriority wp = this.getPriority(rules, priorityList);
+		
+		
+		if (wp.getRuleName() == RuleName.REJECT.label) {
+			// throw exception here
+			
+			throw new ParcelOverWeightException("Maximum Weight reached.");
+		}
 
 		Optional<DimensionCost> optionalDimensionCost = costs.findById(wp.getDimensionCostId());
 
