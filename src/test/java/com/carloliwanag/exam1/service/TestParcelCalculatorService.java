@@ -2,6 +2,7 @@ package com.carloliwanag.exam1.service;
 
 import static org.junit.Assert.assertEquals;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,5 +79,17 @@ public class TestParcelCalculatorService {
 		
 		assertEquals(priority.getRuleName(), "Heavy Parcel");
 
+	}
+	
+	@Test
+	void getPromoCode() {
+		Double discount = service.getDiscount("test");
+		assertEquals(0, discount.intValue());
+		
+		
+		Double GFIdiscount = service.getDiscount("GFI");
+		assertEquals(GFIdiscount.compareTo(new Double(7.5)), -1);
+		
+		
 	}
 }
